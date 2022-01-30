@@ -20,6 +20,15 @@ class Migration(migrations.Migration):
             name='name',
             field=models.CharField(max_length=30, verbose_name='Имя'),
         ),
+        migrations.RemoveField(
+            model_name='student',
+            name='teacher',
+        ),
+        migrations.AddField(
+            model_name='student',
+            name='teacher',
+            field=models.ManyToManyField(related_name='students', to='school.Teacher', verbose_name='Учитель'),
+        ),
         migrations.AlterField(
             model_name='teacher',
             name='name',

@@ -1,11 +1,14 @@
-from django.views.generic import ListView
 from django.shortcuts import render
 
 from .models import Student
 
 
-class StudentListView(ListView):
+def students_list(request):
+
     template = 'school/student_list.html'
-    model = Student
     ordering = 'group'
-    queryset = Student.objects.all().prefetch_related('teacher')
+    students = Student.objects.all().prefetch_related('teacher')
+    result = students.order_by(ordering)
+    context = {'object_list': result}
+
+    return render(request, template, context)
